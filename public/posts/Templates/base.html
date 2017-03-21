@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block head_title %}
+            Django 1.9
+        {% endblock head_title%}</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="/static/css/base.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/bootstrap.css"></script>
+    <script src="/static/js/bootstrap.min.css"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+    <style>
+        body
+{
+margin :10%;
+}
+table{
+    border: 1px solid #000;
+    }
+    td{
+    background-color: white;
+        font-size: 1em;
+        border: 1px solid #98bf21;
+        padding: 3px 7px 2px 7px;
+    }
+        th{
+        font-size: 1em;
+        padding: 3px 7px 2px 7px;
+        text-align: justify;
+        padding-top: 5px;
+        padding-bottom: 4px;
+        backgound-color: #ffc0cb;
+        color: #A7C942;
+
+        }
+        h1{
+        backgound-color: #8a2be2;
+        color: #e9967a;
+        }
+        body{
+        background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class= "container">
+    {% block content %}
+    <h1>{{title}} IS WORKING....</h1>
+
+<table>
+   <thead>
+   <th>Title</th>
+   <th>Content</th>
+   <th>Timestamp</th>
+   <th>Update</th>
+   <th>ID</th>
+   <th>Primary key</th>
+   </thead>
+    {% for obj in queryset %}
+    <tbody>
+    <tr>
+        <td><a href="{{obj.get_absolute_url}}"> {{obj.title}}</a></td>
+          <td>{{obj.content}}</td>
+          <td>{{obj.timestamp}}</td>
+          <td>{{obj.update}}</td>
+          <td>{{obj.id}}</td>
+          <td>{{obj.pk}}</td>
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+    {% if messages %}
+<ul class="messages">
+    {% for message in mesages %}
+         <li {% if message.tags %} class="{{message.tags}}"
+            {% endif %}>
+             {{message}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    {% endblock content %}
+</div>
+
+<script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

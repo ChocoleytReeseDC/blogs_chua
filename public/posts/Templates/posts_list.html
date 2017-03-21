@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+<div class="col-sm-8 col-sm-offset-2">
+    <h1>{{ title }} </h1>
+
+<form method="GET" action="">
+    <input type="text" name="search" placeholder="Search posts" value="{{ request.get.search}}">
+
+    <input type="submit" value="Search" class="btn btn-danger">
+</form>
+</br>
+
+    {% for obj in queryset %}
+    <div class="row">
+        <div class="cool-sm-12">
+            <div class="thumbnail">
+                {% if obj.image %}
+                <img src="{{ obj.image.url }}"
+                     class="img-responsive"/>
+                {% endif %}
+                <div class="caption">
+        <h3><a href="{{obj.get_absolute_url}}"> {{obj.title}}</a>
+                    <small>{{ obj.timestamp|timesince }}
+                    </small></h3>
+
+                    {% if obj.user.get_full_name %}
+                    <p>Author: {{obj.user.get_full_name}}</p>
+                    {% endif %}
+
+
+                    <p>{{ obj.content|linebreaks|truncatechars:120 }}</p>
+                    <p><a href="{{obj.get_absolute_url}}"
+                          class="btn btn-primary" role="button">View</a></p>
+
+           </div>
+    </div>
+            <hr/>
+   </div>
+    </div>
+
+    {% endfor %}
+    </div>
+<hr/>
+{% endblock content %}
